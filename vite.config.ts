@@ -4,7 +4,11 @@ import react from "@vitejs/plugin-react";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { defineConfig } from "vite";
 
+const repoName = "shadcn-oxc-tanstack-template";
+const isGitHubPagesBuild = process.env.VITE_DEPLOY_TARGET === "gh-pages";
+
 export default defineConfig({
+  base: isGitHubPagesBuild ? `/${repoName}/` : "/",
   plugins: [
     TanStackRouterVite({
       autoCodeSplitting: true,

@@ -48,3 +48,16 @@ before typecheck/build so the generated file stays in sync.
 - shadcn components are managed via CLI (`pnpm dlx shadcn@latest add ...`).
 - `oxlint` and `oxfmt` are configured directly through `.oxlintrc.json` and `.oxfmtrc.jsonc`.
 - `tsc -b` remains the source of truth for type errors.
+
+## Deploy (GitHub Pages)
+
+- Workflow: `.github/workflows/deploy-pages.yml`
+- Trigger: pushes to `main`
+- Build target: sets `VITE_DEPLOY_TARGET=gh-pages`
+
+For Pages compatibility:
+
+- Vite uses `base: /shadcn-oxc-tanstack-template/` during Pages builds.
+- Router uses hash history in production when `BASE_URL` is not `/`.
+
+This avoids route refresh 404s on GitHub Pages.
