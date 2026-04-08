@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc",
+    "react",
+    "jsx-a11y",
+    "react-perf",
+    "promise",
+    "import"
+  ],
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": ["dist/**", "src/routeTree.gen.ts"],
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off"
+  },
+  "settings": {
+    "jsx-a11y": {
+      "components": {
+        "Link": "a"
+      }
+    },
+    "react": {
+      "linkComponents": [
+        {
+          "name": "Link",
+          "linkAttribute": ["to", "href"]
+        }
+      ],
+      "version": "19.0.0"
+    }
+  }
+}
