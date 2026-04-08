@@ -1,21 +1,28 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { ListItem } from "@tamagui/list-item";
-import { H2, Paragraph, YStack } from "tamagui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const WorkbenchLayout = () => (
-  <YStack gap="$4">
-    <H2 size="$8">Workbench</H2>
-    <Paragraph size="$5" color="$gray11">
-      This route demonstrates directory-based routing with a parent layout and
-      nested children.
-    </Paragraph>
-    <ListItem
-      title="Route directory"
-      subTitle="src/routes/workbench/*"
-      variant="outlined"
-    />
+  <div className="space-y-4">
+    <Card>
+      <CardHeader>
+        <CardTitle>Workbench</CardTitle>
+        <CardDescription>
+          Starter demos for the TanStack stack used in this template.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground">
+        Choose one demo below. Route directory:{" "}
+        <code>src/routes/workbench/*</code>
+      </CardContent>
+    </Card>
     <Outlet />
-  </YStack>
+  </div>
 );
 
 export const Route = createFileRoute("/workbench")({

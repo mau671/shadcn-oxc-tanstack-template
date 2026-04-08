@@ -1,28 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ListItem } from "@tamagui/list-item";
-import { H2, Paragraph, YStack } from "tamagui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const AboutPage = () => (
-  <YStack gap="$4">
-    <H2 size="$8">A web-first baseline with modern tooling</H2>
-    <Paragraph size="$5" color="$gray11">
-      Vite keeps the developer loop fast, TanStack Router brings typed route
-      generation, and TanStack Query handles async state cleanly.
-    </Paragraph>
-
-    <YStack gap="$2">
-      <ListItem
-        title="Type safety"
-        subTitle="TypeScript stays as source of truth with tsc -b."
-        variant="outlined"
-      />
-      <ListItem
-        title="UI"
-        subTitle="The template uses official Tamagui components directly."
-        variant="outlined"
-      />
-    </YStack>
-  </YStack>
+  <Card>
+    <CardHeader>
+      <CardTitle>A web-first baseline with modern tooling</CardTitle>
+      <CardDescription>
+        Vite keeps the loop fast, TanStack Router gives typed routes, and
+        TanStack Query handles async state.
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-2 text-sm text-muted-foreground">
+      <p>TypeScript remains the source of truth via `tsc -b`.</p>
+      <p>
+        UI components come from shadcn/ui CLI, not hand-rolled component files.
+      </p>
+    </CardContent>
+  </Card>
 );
 
 export const Route = createFileRoute("/about")({

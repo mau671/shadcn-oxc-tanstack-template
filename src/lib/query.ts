@@ -14,9 +14,9 @@ const readShowcaseMetrics = (): Promise<ShowcaseMetric[]> =>
       value: "Vite + code splitting",
     },
     {
-      detail: "The provider is wired for production CSS extraction.",
+      detail: "shadcn/ui components are added and owned in-source via CLI.",
       label: "UI runtime",
-      value: "Tamagui compiler-ready",
+      value: "shadcn/ui + Tailwind v4",
     },
     {
       detail: "Fast linting, formatting, and strict TypeScript checks.",

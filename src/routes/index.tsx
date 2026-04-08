@@ -1,50 +1,62 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
-import { ListItem } from "@tamagui/list-item";
-import { Button, H2, Paragraph, YStack } from "tamagui";
-import { showcaseMetricsQueryOptions } from "../lib/query";
-import { SimpleAccordion } from "../ui/simple-accordion";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { showcaseMetricsQueryOptions } from "@/lib/query";
 
 const HomePage = () => {
   const { data } = useSuspenseQuery(showcaseMetricsQueryOptions);
 
   return (
-    <YStack gap="$5">
-      <YStack gap="$3">
-        <H2 size="$8">Fast setup, clean defaults</H2>
-        <Paragraph size="$5" color="$gray11">
-          File-based routing, query caching, official Tamagui components, and
-          direct Oxc checks.
-        </Paragraph>
-        <YStack gap="$2">
-          <Button size="$4" theme="blue">
-            pnpm dev
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Fast setup, clean defaults</CardTitle>
+          <CardDescription>
+            File-based routing, query caching, shadcn/ui components, and direct
+            Oxc checks.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          <Button>pnpm dev</Button>
+          <Button variant="outline">pnpm check</Button>
+          <Button asChild variant="secondary">
+            <Link to="/workbench">Open demo workbench</Link>
           </Button>
-          <Button size="$4">pnpm check</Button>
-        </YStack>
-      </YStack>
+        </CardContent>
+      </Card>
 
-      <YStack gap="$2">
-        <ListItem
-          title="Directory routing"
-          subTitle="src/routes/workbench/route.tsx owns nested pages."
-          variant="outlined"
-        />
-        <ListItem
-          title="Tooling"
-          subTitle="oxfmt + oxlint + tsc keep feedback clear in CI."
-          variant="outlined"
-        />
-      </YStack>
-
-      <SimpleAccordion
-        items={data.map((metric) => ({
-          body: metric.detail,
-          title: metric.label,
-          value: metric.value,
-        }))}
-      />
-    </YStack>
+      <Card>
+        <CardHeader>
+          <CardTitle>What is already wired</CardTitle>
+          <CardDescription>Stack overview for this template.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Accordion type="multiple" className="w-full">
+            {data.map((metric) => (
+              <AccordionItem key={metric.label} value={metric.label}>
+                <AccordionTrigger>
+                  {metric.label}: {metric.value}
+                </AccordionTrigger>
+                <AccordionContent>{metric.detail}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

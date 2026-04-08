@@ -1,30 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { H2, YStack } from "tamagui";
-import { SimpleAccordion } from "../../ui/simple-accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const tokenNotes = [
+  {
+    title: "Spacing",
+    value: "Use tokenized spacing",
+    body: "Use shared spacing tokens so page rhythm stays consistent.",
+  },
+  {
+    title: "Theme colors",
+    value: "Prefer semantic colors",
+    body: "Prefer semantic variables before hard-coded color values.",
+  },
+  {
+    title: "Typography",
+    value: "Start from defaults",
+    body: "Use the preset typography scale first, then customize as needed.",
+  },
+];
 
 const TokenNotesPage = () => (
-  <YStack gap="$4">
-    <H2 size="$7">Token notes</H2>
-    <SimpleAccordion
-      items={[
-        {
-          body: "Use Tamagui space tokens first so layout stays coherent.",
-          title: "Spacing",
-          value: "Use tokenized spacing",
-        },
-        {
-          body: "Prefer semantic theme colors before hard-coded values.",
-          title: "Theme colors",
-          value: "Keep semantic color usage",
-        },
-        {
-          body: "Default Tamagui typography scale is enough for most starter UIs.",
-          title: "Typography",
-          value: "Lean on defaults first",
-        },
-      ]}
-    />
-  </YStack>
+  <Card>
+    <CardHeader>
+      <CardTitle>Token notes</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <Accordion type="multiple" className="w-full">
+        {tokenNotes.map((item) => (
+          <AccordionItem key={item.title} value={item.title}>
+            <AccordionTrigger>
+              {item.title}: {item.value}
+            </AccordionTrigger>
+            <AccordionContent>{item.body}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </CardContent>
+  </Card>
 );
 
 export const Route = createFileRoute("/workbench/tokens")({
